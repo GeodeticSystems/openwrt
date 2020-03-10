@@ -15,6 +15,7 @@ PROFILE?=
 BUILD_BOOTLOADERS?=
 GW_SVN_URL?=http://svn.gateworks.com/
 GW_DEV_URL?=http://dev.gateworks.com/
+GSI_BOOT_LOC?=$(HOME)/u-boot-imx6
 IMX6_TOOLCHAIN?=toolchain-arm_cortex-a9+neon_gcc-5.2.0_musl-1.1.11_eabi
 CNS3XXX_TOOLCHAIN?=toolchain-arm_mpcore+vfp_gcc-5.2.0_musl-1.1.11_eabi
 
@@ -102,16 +103,18 @@ bootloader/ventana/u-boot.img:
 	rm -f bootloader/ventana/u-boot.img
 	@printf "Fetching $@...\n"
 	@mkdir -p bootloader/ventana
-	wget $(GW_DEV_URL)/ventana/images/u-boot.img \
-			-O bootloader/ventana/u-boot.img
+	cp $(GSI_BOOT_LOC)/u-boot.img bootloader/ventana/u-boot.img
+	# wget $(GW_DEV_URL)/ventana/images/u-boot.img \
+	# 		-O bootloader/ventana/u-boot.img
 
 .PHONY:bootloader/ventana/SPL
 bootloader/ventana/SPL:
 	rm -f bootloader/ventana/SPL
 	@printf "Fetching $@...\n"
 	@mkdir -p bootloader/ventana
-	wget $(GW_DEV_URL)/ventana/images/SPL \
-			-O bootloader/ventana/SPL
+	cp $(GSI_BOOT_LOC)/SPL bootloader/ventana/SPL
+	# wget $(GW_DEV_URL)/ventana/images/SPL \
+	# 		-O bootloader/ventana/SPL
 
 
 .PHONY:bootloader/laguna/u-boot_nor.bin
